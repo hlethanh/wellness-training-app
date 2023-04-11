@@ -11,3 +11,25 @@ class Customer(models.Model):
 
     def __str__(self):
         return f'{self.lastname} {self.firstname}'
+
+#Cette class définit tous les groupes musculaires
+class MuscleGroup(models.Model):
+    name = models.fields.CharField(blank=True, null=True, max_length=50)
+
+    def all_exercises(self):
+        return " / ".join(map(str, [s.name for s in MuscleGroupExo.objects.filter(muscle_group=self)[0:3]]))
+
+    def __str__(self):
+        return f'{self.name}'
+
+#Cette class définit tous les exercices associés à un groupe musculaire
+class MuscleGroupExo(models.Model):
+    class Meta:
+        verbose_name = 'Exercise'
+        verbose_name_plural = 'Exercises'
+
+    name = models.fields.CharField(blank=True, null=True, max_length=250)
+    muscle_group = models.ForeignKey(MuscleGroup, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'[ {self.muscle_group.name} ] - {self.name}'
