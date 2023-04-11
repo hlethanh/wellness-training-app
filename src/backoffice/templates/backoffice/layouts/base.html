@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'backoffice/css/app.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'backoffice/styles.css' %}">
+    <title>Training App - {% block title %}index{% endblock %}</title>
+
+</head>
+<body>
+    <div class="wrapper">
+        {% include 'backoffice/common/sidebar.html' %}
+		<div class="main">
+			{% include 'backoffice/common/nav.html' %}
+			<main class="content">
+				{% block content %}{% endblock %}
+			</main>
+		</div>
+	</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="{% static 'backoffice/js/app.js' %}"></script>
+    <script src="{% static 'backoffice/main.js' %}"></script>
+</body>
+</html>
