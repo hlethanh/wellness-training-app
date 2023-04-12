@@ -22,9 +22,9 @@
                  <tbody>
                     {% for customer in customers %}
                      <tr>
-                        <td><a alt="View" title="View" href="{% url 'customer-detail' customer.id %}">{{ customer.lastname }}</a></td>
+                        <td><a alt="View" title="View" href="{% url 'customer-read' customer.id %}">{{ customer.lastname }}</a></td>
                         <td>
-                            <a alt="View" title="View" href="{% url 'customer-detail' customer.id %}">
+                            <a alt="View" title="View" href="{% url 'customer-read' customer.id %}">
                                 {% if customer.firstname != None %}
                                     {{ customer.firstname }}
                                 {% endif %}
@@ -32,7 +32,8 @@
                         </td>
                         <td>
                            <span><a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}"><i class="me-2" data-feather="edit"></i></a></span>
-                           <span><a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a></span>
+                           <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
+                           <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
                         </td>
                      </tr>
                     {% endfor %}

@@ -15,7 +15,18 @@
                         </div>
                         <div class="card-body pt-0">
                             <div class="text-center">
-                                <img src="{% static 'backoffice/img/avatars/avatar-nobody.png' %}" alt="{{ customer.lastname }} {{ customer.firstname }}" title="{{ customer.lastname }} {{ customer.firstname }}" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                                <img
+                                        {% if customer.civility == "M." %}
+                                            src="{% static 'backoffice/img/avatars/avatar-nobody-m.png' %}"
+                                        {% elif customer.civility == "Mme" %}
+                                            src="{% static 'backoffice/img/avatars/avatar-nobody-f.png' %}"
+                                        {% else %}
+                                            src="{% static 'backoffice/img/avatars/avatar-nobody.png' %}"
+                                        {% endif %}
+                                        alt="Avatar"
+                                        title="Avatar"
+                                        class="img-fluid rounded-circle mb-2"
+                                        width="128" height="128" />
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Civility(*):</label>{{ form.civility }}
@@ -66,13 +77,23 @@
                                     <button type="submit" class="btn btn-success btn-sm">Save</button>
                                 </li>
                                 <li class="mb-2"><span data-feather="x-square" class="feather-sm me-1"></span>
-                                    <button type="submit" class="btn btn-outline-success btn-sm"><a alt="Cancel" title="Cancel" href="{% url 'customers-list' %}">Cancel</a></button>
+                                    <a alt="Cancel" title="Cancel" href="{% url 'customers' %}">
+                                        <button type=button class="btn btn-outline-success btn-sm">Cancel</button>
+                                    </a>
                                 </li>
+                                {% if customer.id %}
+                                <li class="mb-2"><span data-feather="trash" class="feather-sm me-1"></span>
+                                    <a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}">
+                                        <button type=button class="btn btn-danger btn-sm">Delete</button>
+                                    </a>
+                                </li>
+                                {% endif %}
+
                             </ul>
                             <hr/>
                             <ul class="list-unstyled mb-0">
                                 <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span>
-                                    <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers-list' %}">Back to Customers</a>
+                                    <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers' %}">Back to Customers</a>
                                 </li>
                             </ul>
                         </div>

@@ -23,10 +23,11 @@ urlpatterns = [
     path('model-table/', views.model_table, name='model-table'),
 
     path('admin/', admin.site.urls),
-    path('', views.customer_list, name='customers-list'),
+    path('', views.index, name='home'),
     path('customers/', views.customer_list, name='customers'),
-    path('customer/add/', views.customer_create, name='customer-create'),
-    path('customer/detail/<int:id>/', views.customer_detail, name='customer-detail'),
-    path('customer/update/<int:id>/', views.customer_update, name='customer-update'),
+    path('customers/create/', views.customer_create, name='customer-create'),
+    path('customers/read/<int:id>/', views.customer_read, name='customer-read'),
+    path('customers/update/<int:id>/', views.customer_update, name='customer-update'),
+    path('customers/delete/<int:id>/', views.customer_delete, name='customer-delete'),
 
 ]

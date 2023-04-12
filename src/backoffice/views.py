@@ -8,6 +8,8 @@ def model_blank(request):
     return render(request, 'backoffice/model_blank.html')
 def model_table(request):
     return render(request, 'backoffice/model_table.html')
+def index(request):
+    return redirect('customers')
 def customer_list(request):
     customers = Customer.objects.all()
 
@@ -30,7 +32,7 @@ def customer_create(request):
     return render(request,
                   'backoffice/customer_create.html',
                   {'form': form})
-def customer_detail(request, id):
+def customer_read(request, id):
     customer = Customer.objects.get(id=id)
 
     return render(request,
@@ -44,10 +46,14 @@ def customer_update(request, id):
             # mettre à jour le groupe existant dans la base de données
             form.save()
             # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
-            return redirect('customer-detail', customer.id)
+            return redirect('customer-read', customer.id)
     else:
         form = CustomerForm(instance=customer)  # on pré-remplir le formulaire avec un groupe existant
 
     return render(request,
-                  'backoffice/customer_update.html',
-                  {'form': form})
+                  'backoffice/customer_create.html',
+                  {'form': form, 'customer': customer})
+def customer_delete(request, id):
+    customer = Customer.objects.get(id=id)
+    customer.delete()
+    return redirect('customers')
