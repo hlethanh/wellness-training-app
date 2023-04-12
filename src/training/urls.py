@@ -25,9 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='home'),
     path('customers/', views.customer_list, name='customers'),
-    path('customers/create/', views.customer_create, name='customer-create'),
-    path('customers/read/<int:id>/', views.customer_read, name='customer-read'),
-    path('customers/update/<int:id>/', views.customer_update, name='customer-update'),
-    path('customers/delete/<int:id>/', views.customer_delete, name='customer-delete'),
+    path('customer/create/', views.customer_create, name='customer-create'),
+    path('customer/<int:id>/', views.customer_read, name='customer-read'),
+    path('customer/update/<int:id>/', views.customer_update, name='customer-update'),
+    path('customer/delete/<int:id>/', views.customer_delete, name='customer-delete'),
+
+    path('muscles/', views.muscle_list, name='muscles'),
 
 ]

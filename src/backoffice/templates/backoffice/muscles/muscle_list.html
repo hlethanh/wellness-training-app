@@ -1,0 +1,43 @@
+{% extends 'backoffice/layouts/base.html' %}
+{% load static %}
+{% block title %}Muscles List{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+   <div class="row">
+      <div class="col-12 col-lg-10 col-xxl-12 d-flex">
+         <div class="card flex-fill">
+             <div class="card-header">
+                 <h5 class="card-title mb-0">Muscles List</h5>
+                 <div class="container-left">
+                     <a href="#" alt="Create" title="Create">
+                         <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
+                     </a>
+                 </div>
+                 <hr/>
+             </div>
+             <table class="table table-hover my-0">
+                 <thead>
+                     <tr>
+                         <th>Name</th>
+                         <th>Actions</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    {% for muscle in muscles %}
+                     <tr>
+                        <td><a alt="View" title="View" href="#">{{ muscle.name }}</a></td>
+                        <td>
+                            <a href="#" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>View</button></a>
+                            <a href="#" alt="Edit" title="Edit"><button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>Edit</button></a>
+                            <a href="#" alt="Delete" title="Delete"><button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>Delete</button></a>
+                        </td>
+                     </tr>
+                    {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

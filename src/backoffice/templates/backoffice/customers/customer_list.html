@@ -4,12 +4,17 @@
 
 {% block content %}
 <div class="container-fluid p-0">
-   <h1 class="h3 mb-3">Customers [ List ]</h1>
    <div class="row">
       <div class="col-12 col-lg-10 col-xxl-12 d-flex">
          <div class="card flex-fill">
              <div class="card-header">
-                 <h5 class="card-title mb-0">Programmes List</h5>
+                 <h5 class="card-title mb-0">Customers List</h5>
+                 <div class="container-left">
+                     <a href="{% url 'customer-create'%}" alt="Create" title="Create">
+                         <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
+                     </a>
+                 </div>
+                 <hr/>
              </div>
              <table class="table table-hover my-0">
                  <thead>
@@ -36,19 +41,9 @@
                             <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
                             <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
                             -->
-
-                            <button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>
-                                <a alt="View" title="View" style="text-decoration:none" href="{% url 'customer-read' customer.id %}">View</a>
-                            </button>
-                            <button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>
-                                <a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}">Edit</a>
-                            </button>
-                            <button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>
-                                <a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}">Delete</a>
-                            </button>
-                            <a alt="Delete" title="Delete" href="{% url 'customer-create'%}">
-                                <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
-                            </a>
+                            <a href="{% url 'customer-read' customer.id %}" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>View</button></a>
+                            <a href="{% url 'customer-update' customer.id %}" alt="Edit" title="Edit"><button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>Edit</button></a>
+                            <a href="{% url 'customer-delete' customer.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>Delete</button></a>
                         </td>
                      </tr>
                     {% endfor %}

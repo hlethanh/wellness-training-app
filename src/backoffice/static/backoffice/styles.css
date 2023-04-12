@@ -1,1 +1,13 @@
-body{background-color: white;}
+a.no-link:hover,
+a.no-link:link,
+a.no-link:visited,
+a.no-link:active
+{
+    color:#fff;
+    text-decoration:none;
+}
+.container-left{
+    position:relative;
+    float:right;
+    margin-top:-1.5em;
+}
