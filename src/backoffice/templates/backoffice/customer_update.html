@@ -1,6 +1,6 @@
 {% extends 'backoffice/layouts/base.html' %}
 {% load static %}
-{% block title %}Customer Detail{% endblock %}
+{% block title %}Customer Update{% endblock %}
 
 {% block content %}
    <div class="container-fluid p-0">
@@ -17,55 +17,55 @@
                 <div class="card-header">
                     <h5 class="card-title mb-0">Profile Details</h5>
                 </div>
-                <div class="card-body text-center">
-                    <img
-                            {% if customer.civility == 'M.' %}
-                                src="{% static 'backoffice/img/avatars/avatar-nobody-m.png' %}"
-                            {% else %}
-                                src="{% static 'backoffice/img/avatars/avatar-nobody-f.png' %}"
-                            {% endif %}
-
-                            alt="{{ customer.lastname }} {{ customer.firstname }}"
-                            title="{{ customer.lastname }} {{ customer.firstname }}"
-                            class="img-fluid rounded-circle mb-2"
-                            width="128" height="128"/>
-                    <h5 class="card-title mb-0">{{ customer.civility }} {{ customer.firstname }} {{ customer.lastname }}</h5>
-                    <div class="text-muted mb-2"></div>
-                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img src="{% static 'backoffice/img/avatars/avatar-nobody.png' %}" alt="{{ customer.lastname }} {{ customer.firstname }}" title="{{ customer.lastname }} {{ customer.firstname }}" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Civility: {{ form.civility }}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lastname: {{ form.lastname }}</label>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Firstname: {{ form.firstname }}</label>
+                        </div>
+                        <div class="text-muted mb-2"></div>
+                    </div>
                 <hr class="my-0" />
                 <div class="card-body">
                     <h5 class="h6 card-title">About</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-2"><span data-feather="phone" class="feather-sm me-1"></span> Phone: {{ customer.phone }}</li>
-                        <li class="mb-2"><span data-feather="mail" class="feather-sm me-1"></span> Email: {{ customer.email }}</li>
-                        <li class="mb-2"><span data-feather="map-pin" class="feather-sm me-1"></span>
-                            <span>{{ customer.address }}, {{ customer.address_num }}
-                                {% if customer.address_box != None %}
-                                - Box: {{ customer.address_box }}
-                                {% endif %}
-                            </span>
-                            <span style="display:block; padding-left:1.5em">{{ customer.address_zip_code }} {{ customer.address_city }} - {{ customer.address_country }}</span>
-                        </li>
+                        <li class="mb-2"><label class="form-label">Phone: {{ form.phone }}</label></li>
+                        <li class="mb-2"><label class="form-label">Email: {{ form.email }}</label></li>
+                        <li class="mb-2"><label class="form-label">Address: {{ form.address }}</label></li>
+                        <li class="mb-2"><label class="form-label">Num: {{ form.address_num }}</label></li>
+                        <li class="mb-2"><label class="form-label">Box: {{ form.address_box }}</label></li>
+                        <li class="mb-2"><label class="form-label">Zip code: {{ form.address_zip_code }}</label></li>
+                        <li class="mb-2"><label class="form-label">City: {{ form.address_city }}</label></li>
+                        <li class="mb-2"><label class="form-label">Country: {{ form.address_country }}</label></li>
                     </ul>
                 </div>
                 <hr class="my-0" />
                 <div class="card-body">
-                    <h5 class="h6 card-title"><span style="padding-right:0.3em;">Status</span>
-                        {% if customer.active == True %}
-                        <span data-feather="check-square" class="feather-md me-1 text-warning"></span>
-                        {% else %}
-                        <span data-feather="minus-square" class="feather-md me-1 text-danger"></span>
-                        {% endif %}
-                    </h5>
+                    <h5 class="h6 card-title"><span style="padding-right:0.3em;">Status</span>{{ form.active }}</h5>
                 </div>
                 <hr class="my-0" />
                 <div class="card-body">
                     <h5 class="h6 card-title">Actions</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-1"><span data-feather="edit-3" class="feather-sm me-1"></span> <a alt="Edit Profile" title="Edit Profile" href="{% url 'customer-update' customer.id %}">Edit Profile</a></li>
-                        <li class="mb-1"><span data-feather="users" class="feather-sm me-1"></span> <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers-list' %}">Back to Customers</a></li>
+                        <li class="mb-1"><span data-feather="save" class="feather-sm me-1"></span><button type="submit" class="btn btn-success btn-sm">Save</button></li>
+                        <li class="mb-1"><span data-feather="x-square" class="feather-sm me-1"></span>
+                            <button type="submit" class="btn btn-outline-success btn-sm"><a alt="Cancel" title="Cancel" href="{{request.META.HTTP_REFERER|escape}}">Cancel</a></button>
+                        </li>
+                        <li class="mb-1"><span data-feather="users" class="feather-sm me-1"></span>
+                            <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers-list' %}">Back to Customers</a>
+                        </li>
                     </ul>
                 </div>
+                </form>
             </div>
         </div>
          <div class="col-md-8 col-xl-9">

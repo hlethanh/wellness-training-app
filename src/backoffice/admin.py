@@ -3,7 +3,8 @@ from backoffice.models import *
 from backoffice.widgets import PastCustomDatePickerWidget
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['lastname', 'firstname','birthday', 'weight']
+    list_display = [f.name for f in Customer._meta.fields]
+    list_display_links = ['lastname']
     formfield_overrides = {
         models.DateField:{'widget': PastCustomDatePickerWidget}
     }

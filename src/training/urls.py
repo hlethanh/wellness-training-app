@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.customer_list, name='customers-list'),
     path('customers/', views.customer_list, name='customers-list'),
-    path('customer/<int:id>/', views.customer_detail, name='customer-detail'),
+    path('customer/detail/<int:id>/', views.customer_detail, name='customer-detail'),
+    path('customer/update/<int:id>/', views.customer_update, name='customer-update'),
 
 ]

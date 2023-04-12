@@ -4,20 +4,26 @@ from django.utils import timezone
 
 #Cette class définit les abonnés
 class Customer(models.Model):
-    lastname = models.fields.CharField(blank=True, null=True, max_length=50)
-    firstname = models.fields.CharField(blank=True, null=True, max_length=50)
-    birthday = models.DateField(null=True, blank=True)
-    weight = models.FloatField(blank=True, null=True)
+    class Civility(models.TextChoices):
+        MONSIEUR = 'M.'
+        MADAME = 'Mme'
 
+    civility = models.fields.CharField(choices=Civility.choices, blank=False, max_length=10)
+    lastname = models.fields.CharField(blank=False, max_length=100)
+    firstname = models.fields.CharField(blank=True, null=True, max_length=100)
+    email = models.fields.EmailField(blank=False, max_length=254, unique=False)
+    phone = models.fields.CharField(blank=False, max_length=15, unique=False)
+    address = models.fields.CharField(blank=True, null=True, max_length=250)
+    address_num = models.fields.IntegerField(blank=True, null=True)
+    address_box = models.fields.IntegerField(blank=True, null=True)
+    address_zip_code = models.fields.IntegerField(blank=True, null=True)
+    address_city = models.fields.CharField(blank=True, null=True, max_length=250)
+    address_country = models.fields.CharField(blank=True, null=True, max_length=250)
+    birthday = models.DateField(blank=True, null=True)
+    weight = models.FloatField(blank=True, null=True)
+    active = models.BooleanField(default=True)
     def __str__(self):
         return f'{self.lastname} {self.firstname}'
-
-def customer_detail(request, id):
-    customer = Customer.objects.get(id=id)  # nous insérons cette ligne pour obtenir le Program avec cet id
-
-    return render(request,
-                  'backoffice/customer_detail.html',
-                  {'customer': customer})
 
 #Cette class définit tous les groupes musculaires
 class MuscleGroup(models.Model):
