@@ -12,6 +12,13 @@ class Customer(models.Model):
     def __str__(self):
         return f'{self.lastname} {self.firstname}'
 
+def customer_detail(request, id):
+    customer = Customer.objects.get(id=id)  # nous insérons cette ligne pour obtenir le Program avec cet id
+
+    return render(request,
+                  'backoffice/customer_detail.html',
+                  {'customer': customer})
+
 #Cette class définit tous les groupes musculaires
 class MuscleGroup(models.Model):
     name = models.fields.CharField(blank=True, null=True, max_length=50)

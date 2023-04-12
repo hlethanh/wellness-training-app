@@ -1,0 +1,39 @@
+{% extends 'backoffice/layouts/base.html' %}
+
+{% block content %}
+<div class="container-fluid p-0">
+   <h1 class="h3 mb-3">Table [ List ]</h1>
+   <div class="row">
+      <div class="col-12 col-lg-10 col-xxl-12 d-flex">
+         <div class="card flex-fill">
+             <div class="card-header">
+                 <h5 class="card-title mb-0">Table List</h5>
+             </div>
+             <table class="table table-hover my-0">
+                 <thead>
+                     <tr>
+                         <th>Lastname</th>
+                         <th>Firstname</th>
+                         <th class="d-none d-xl-table-cell">Start Date</th>
+                         <th class="d-none d-xl-table-cell">End Date</th>
+                         <th>Actions</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr>
+                        <td><a alt="View" title="View" href="#">Lastname</a></td>
+                        <td><a alt="View" title="View" href="#">Firstname</a></td>
+                        <td class="d-none d-xl-table-cell">01/01/2021</td>
+                        <td class="d-none d-xl-table-cell">31/06/2021</td>
+                        <td>
+                           <span><a alt="Edit" title="Edit" href="#"><i class="me-2" data-feather="edit"></i></a></span>
+                           <span><a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a></span>
+                        </td>
+                     </tr>
+                 </tbody>
+             </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
