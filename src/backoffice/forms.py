@@ -2,6 +2,11 @@ from django import forms
 from django.forms import TextInput, Select
 from backoffice.models import Customer
 
+TRUE_FALSE_CHOICES = (
+    (True, 'Actif'),
+    (False, 'No Actif')
+)
+
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
@@ -20,4 +25,5 @@ class CustomerForm(forms.ModelForm):
                    'address_zip_code': TextInput(attrs={'class': 'form-control'}),
                    'address_city': TextInput(attrs={'class': 'form-control'}),
                    'address_country': TextInput(attrs={'class': 'form-control'}),
+                   'active': Select(choices=TRUE_FALSE_CHOICES, attrs={'class': 'form-select'}),
                    }

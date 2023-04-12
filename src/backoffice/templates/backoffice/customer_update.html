@@ -56,11 +56,11 @@
                 <div class="card-body">
                     <h5 class="h6 card-title">Actions</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-1"><span data-feather="save" class="feather-sm me-1"></span><button type="submit" class="btn btn-success btn-sm">Save</button></li>
-                        <li class="mb-1"><span data-feather="x-square" class="feather-sm me-1"></span>
+                        <li class="mb-2"><span data-feather="save" class="feather-sm me-1"></span><button type="submit" class="btn btn-success btn-sm">Save</button></li>
+                        <li class="mb-2"><span data-feather="x-square" class="feather-sm me-1"></span>
                             <button type="submit" class="btn btn-outline-success btn-sm"><a alt="Cancel" title="Cancel" href="{{request.META.HTTP_REFERER|escape}}">Cancel</a></button>
                         </li>
-                        <li class="mb-1"><span data-feather="users" class="feather-sm me-1"></span>
+                        <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span>
                             <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers-list' %}">Back to Customers</a>
                         </li>
                     </ul>
