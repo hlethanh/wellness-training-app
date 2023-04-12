@@ -31,9 +31,24 @@
                             </a>
                         </td>
                         <td>
-                           <span><a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}"><i class="me-2" data-feather="edit"></i></a></span>
-                           <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
-                           <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
+                            <!--
+                            <span><a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}"><i class="me-2" data-feather="edit"></i></a></span>
+                            <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
+                            <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
+                            -->
+
+                            <button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>
+                                <a alt="View" title="View" style="text-decoration:none" href="{% url 'customer-read' customer.id %}">View</a>
+                            </button>
+                            <button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>
+                                <a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}">Edit</a>
+                            </button>
+                            <button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>
+                                <a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}">Delete</a>
+                            </button>
+                            <a alt="Delete" title="Delete" href="{% url 'customer-create'%}">
+                                <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
+                            </a>
                         </td>
                      </tr>
                     {% endfor %}
