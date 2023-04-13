@@ -3,8 +3,8 @@ from django.forms import TextInput, Select
 from backoffice.models import Customer, MuscleGroup
 
 TRUE_FALSE_CHOICES = (
-    (True, 'Actif'),
-    (False, 'No Actif')
+    (True, 'Yes'),
+    (False, 'No')
 )
 
 class CustomerForm(forms.ModelForm):

@@ -26,9 +26,7 @@
                     {% for muscle in muscles %}
                      <tr>
                         <td>{{ muscle.name }}</td>
-                        <td>
-                            <a href="{% url 'muscle-delete' muscle.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a>
-                        </td>
+                        <td class="text-end"><a href="{% url 'muscle-delete' muscle.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a></td>
                      </tr>
                     {% endfor %}
                  </tbody>
