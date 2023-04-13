@@ -10,9 +10,8 @@
              <div class="card-header">
                  <h5 class="card-title mb-0">Muscles List</h5>
                  <div class="container-left">
-                     <a href="#" alt="Create" title="Create">
-                         <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
-                     </a>
+                     <a href="{% url 'muscle-create' %}" alt="Add" title="Add"><button type=button class="btn btn-primary btn-sm"><i class="me-1" data-feather="plus-square"></i>Add</button></a>
+                     <a href="{% url 'muscle-update' %}" alt="Edit" title="Edit"><button type=button class="btn btn-secondary btn-sm"><i class="me-1" data-feather="edit"></i>Edit</button></a>
                  </div>
                  <hr/>
              </div>
@@ -20,17 +19,15 @@
                  <thead>
                      <tr>
                          <th>Name</th>
-                         <th>Actions</th>
+                         <th></th>
                      </tr>
                  </thead>
                  <tbody>
                     {% for muscle in muscles %}
                      <tr>
-                        <td><a alt="View" title="View" href="#">{{ muscle.name }}</a></td>
+                        <td>{{ muscle.name }}</td>
                         <td>
-                            <a href="#" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>View</button></a>
-                            <a href="#" alt="Edit" title="Edit"><button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>Edit</button></a>
-                            <a href="#" alt="Delete" title="Delete"><button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>Delete</button></a>
+                            <a href="{% url 'muscle-delete' muscle.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a>
                         </td>
                      </tr>
                     {% endfor %}

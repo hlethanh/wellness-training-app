@@ -10,8 +10,8 @@
              <div class="card-header">
                  <h5 class="card-title mb-0">Customers List</h5>
                  <div class="container-left">
-                     <a href="{% url 'customer-create'%}" alt="Create" title="Create">
-                         <button type=button class="btn btn-primary btn-sm"><i class="me-2" data-feather="user-plus"></i>Create</button>
+                     <a href="{% url 'customer-create'%}" alt="Add" title="Add">
+                         <button type=button class="btn btn-primary btn-sm"><i class="me-1" data-feather="plus-square"></i>Add</button>
                      </a>
                  </div>
                  <hr/>
@@ -21,19 +21,16 @@
                      <tr>
                          <th>Lastname</th>
                          <th>Firstname</th>
-                         <th>Actions</th>
+                         <th></th>
                      </tr>
                  </thead>
                  <tbody>
                     {% for customer in customers %}
                      <tr>
-                        <td><a alt="View" title="View" href="{% url 'customer-read' customer.id %}">{{ customer.lastname }}</a></td>
-                        <td>
-                            <a alt="View" title="View" href="{% url 'customer-read' customer.id %}">
-                                {% if customer.firstname != None %}
-                                    {{ customer.firstname }}
-                                {% endif %}
-                            </a>
+                        <td>{{ customer.lastname }}</td>
+                        <td>{% if customer.firstname != None %}
+                                {{ customer.firstname }}
+                            {% endif %}
                         </td>
                         <td>
                             <!--
@@ -41,9 +38,9 @@
                             <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
                             <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
                             -->
-                            <a href="{% url 'customer-read' customer.id %}" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-2" data-feather="eye"></i>View</button></a>
-                            <a href="{% url 'customer-update' customer.id %}" alt="Edit" title="Edit"><button type=button class="btn btn-warning btn-sm"><i class="me-2" data-feather="edit"></i>Edit</button></a>
-                            <a href="{% url 'customer-delete' customer.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-danger btn-sm"><i class="me-2" data-feather="x-square"></i>Delete</button></a>
+                            <a href="{% url 'customer-read' customer.id %}" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-1" data-feather="eye"></i>View</button></a>
+                            <a href="{% url 'customer-update' customer.id %}" alt="Edit" title="Edit"><button type=button class="btn btn-secondary btn-sm"><i class="me-1" data-feather="edit"></i>Edit</button></a>
+                            <a href="{% url 'customer-delete' customer.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a>
                         </td>
                      </tr>
                     {% endfor %}

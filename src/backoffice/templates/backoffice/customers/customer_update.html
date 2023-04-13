@@ -60,8 +60,7 @@
                         <li class="mb-2"><span data-feather="x-square" class="feather-sm me-1"></span>
                             <button type="submit" class="btn btn-outline-success btn-sm"><a alt="Cancel" title="Cancel" href="{{request.META.HTTP_REFERER|escape}}">Cancel</a></button>
                         </li>
-                        <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span>
-                            <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers' %}">Back to Customers</a>
+                        <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span><a alt="Back to Customers" title="Back to Customers" href="{% url 'customer-list' %}">Back to Customers</a>
                         </li>
                     </ul>
                 </div>
@@ -92,7 +91,7 @@
                                     <form action="" method="post">
                                     {% csrf_token %}
                                        <span style="padding-left:8%">
-                                            <a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a>
+                                            <a alt="Delete" title="Delete" href="#"><i class="me-1" data-feather="trash-2"></i></a>
                                         </span>
                                     </form>
                                 </td>
@@ -128,7 +127,7 @@
                                     <form action="" method="post">
                                     {% csrf_token %}
                                        <span style="padding-left:8%">
-                                            <a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a>
+                                            <a alt="Delete" title="Delete" href="#"><i class="me-1" data-feather="trash-2"></i></a>
                                         </span>
                                     </form>
                                 </td>

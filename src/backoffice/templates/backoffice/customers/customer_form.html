@@ -73,28 +73,28 @@
                             <h5 class="card-title mb-0">Actions</h5>
                             <hr />
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><span data-feather="save" class="feather-sm me-1"></span>
-                                    <button type="submit" class="btn btn-success btn-sm">Save</button>
+                                <li class="mb-2">
+                                    <button type=submit class="btn btn-primary btn-sm"><i class="me-1" data-feather="save"></i>Save</button>
                                 </li>
-                                <li class="mb-2"><span data-feather="x-square" class="feather-sm me-1"></span>
-                                    <a alt="Cancel" title="Cancel" href="{% url 'customers' %}">
-                                        <button type=button class="btn btn-outline-success btn-sm">Cancel</button>
+                                <li class="mb-2">
+                                    <a alt="Cancel" title="Cancel" href="{{request.META.HTTP_REFERER|escape}}">
+                                        <button type=button class="btn btn-success btn-sm"><i class="me-1" data-feather="x-square"></i>Cancel</button>
                                     </a>
                                 </li>
-                                {% if customer.id %}
-                                <li class="mb-2"><span data-feather="trash" class="feather-sm me-1"></span>
-                                    <a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}">
-                                        <button type=button class="btn btn-danger btn-sm">Delete</button>
-                                    </a>
-                                </li>
-                                {% endif %}
-
                             </ul>
+                            {% if customer.id %}
                             <hr/>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span>
-                                    <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers' %}">Back to Customers</a>
+                                <li class="mb-2">
+                                    <a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}">
+                                        <button type=button class="btn btn-outline-danger btn-sm"><span data-feather="trash" class="feather-sm me-1"></span>Delete</button>
+                                    </a>
                                 </li>
+                            </ul>
+                            {% endif %}
+                            <hr/>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span><a alt="Go to Customers" title="Go to Customers" href="{% url 'customer-list' %}">Go to Customers</a></li>
                             </ul>
                         </div>
                     </div>

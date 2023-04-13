@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import TextInput, Select
-from backoffice.models import Customer
+from backoffice.models import Customer, MuscleGroup
 
 TRUE_FALSE_CHOICES = (
     (True, 'Actif'),
@@ -27,3 +27,8 @@ class CustomerForm(forms.ModelForm):
                    'address_country': TextInput(attrs={'class': 'form-control'}),
                    'active': Select(choices=TRUE_FALSE_CHOICES, attrs={'class': 'form-select'}),
                    }
+class MuscleForm(forms.ModelForm):
+    class Meta:
+        model = MuscleGroup
+        fields = '__all__'
+        widgets = {'name': TextInput(attrs={'class': 'form-control','style':'width:50%'})}

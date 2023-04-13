@@ -42,15 +42,15 @@
                 <div class="card-body">
                     <h5 class="h6 card-title">About</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-2"><span data-feather="phone" class="feather-sm me-1"></span> Phone: {{ customer.phone }}</li>
-                        <li class="mb-2"><span data-feather="mail" class="feather-sm me-1"></span> Email: {{ customer.email }}</li>
+                        <li class="mb-2"><span data-feather="phone" class="feather-sm me-1"></span>Phone: {{ customer.phone }}</li>
+                        <li class="mb-2"><span data-feather="mail" class="feather-sm me-1"></span>Email: {{ customer.email }}</li>
                         <li class="mb-2"><span data-feather="map-pin" class="feather-sm me-1"></span>
                             <span>{{ customer.address }}, {{ customer.address_num }}
                                 {% if customer.address_box != None %}
                                 - Box: {{ customer.address_box }}
                                 {% endif %}
                             </span>
-                            <span style="display:block; padding-left:1.5em">{{ customer.address_zip_code }} {{ customer.address_city }} - {{ customer.address_country }}</span>
+                            <span style="display:block; padding-left:1.9em">{{ customer.address_zip_code }} {{ customer.address_city }} - {{ customer.address_country }}</span>
                         </li>
                     </ul>
                 </div>
@@ -68,8 +68,8 @@
                 <div class="card-body">
                     <h5 class="h6 card-title">Actions</h5>
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-1"><span data-feather="edit-3" class="feather-sm me-1"></span> <a alt="Edit Profile" title="Edit Profile" href="{% url 'customer-update' customer.id %}">Edit Profile</a></li>
-                        <li class="mb-1"><span data-feather="users" class="feather-sm me-1"></span> <a alt="Back to Customers" title="Back to Customers" href="{% url 'customers' %}">Back to Customers</a></li>
+                        <li class="mb-2"><span data-feather="edit" class="feather-sm me-1"></span><a alt="Edit Profile" title="Edit Profile" href="{% url 'customer-update' customer.id %}">Edit Profile</a></li>
+                        <li class="mb-2"><span data-feather="users" class="feather-sm me-1"></span><a alt="Go to Customers" title="Go to Customers" href="{% url 'customer-list' %}">Go to Customers</a></li>
                     </ul>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                                     <form action="" method="post">
                                     {% csrf_token %}
                                        <span style="padding-left:8%">
-                                            <a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a>
+                                            <a alt="Delete" title="Delete" href="#"><i class="me-1" data-feather="trash-2"></i></a>
                                         </span>
                                     </form>
                                 </td>
@@ -134,7 +134,7 @@
                                     <form action="" method="post">
                                     {% csrf_token %}
                                        <span style="padding-left:8%">
-                                            <a alt="Delete" title="Delete" href="#"><i class="me-2" data-feather="trash-2"></i></a>
+                                            <a alt="Delete" title="Delete" href="#"><i class="me-1" data-feather="trash-2"></i></a>
                                         </span>
                                     </form>
                                 </td>
@@ -149,7 +149,8 @@
                 <div class="card-header">
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
-                            <span data-feather="list" class="feather me-1"></span> <a alt="Back to Program list" title="Back to Program list" href="#">Back to Program list</a>
+                            <span data-feather="list" class="feather me-1"></span>
+                            <a alt="Back to Program list" title="Go to Program List" href="#">Go to Program list</a>
                             <div class=" float-end">
                                 <span data-feather="edit-3" class="feather me-1"></span> <a href="#">Edit Program</a>
                             </div>
