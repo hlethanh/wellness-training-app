@@ -2,9 +2,12 @@ from django.contrib import admin
 from backoffice.models import *
 from backoffice.widgets import PastCustomDatePickerWidget
 
+#class UserAdmin(admin.ModelAdmin):
+    #list_display = [f.name for f in User._meta.fields]
+
 class CustomerAdmin(admin.ModelAdmin):
     list_display = [f.name for f in Customer._meta.fields]
-    list_display_links = ['lastname']
+    #list_display_links = ['username']
     formfield_overrides = {
         models.DateField:{'widget': PastCustomDatePickerWidget}
     }
@@ -21,6 +24,10 @@ class MuscleGroupAdmin(admin.ModelAdmin):
     fields = ['name']
     inlines = [MuscleGroupExoStackedInline]
     list_display = ['name','all_exercises']
+
+    verbose_name = 'Hello'
+    verbose_name_plural = 'Hellos'
+
     ordering = ['name']  # ASC
 
 class MuscleGroupExoAdmin(admin.ModelAdmin):
@@ -30,6 +37,7 @@ class MuscleGroupExoAdmin(admin.ModelAdmin):
     ordering = ['muscle_group__name']  # ASC
 
 
+#admin.site.register(User, UserAdmin)
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(MuscleGroup,MuscleGroupAdmin)
 admin.site.register(MuscleGroupExo, MuscleGroupExoAdmin)

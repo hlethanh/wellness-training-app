@@ -1,9 +1,31 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core.serializers import serialize
 from django.forms import modelformset_factory, TextInput
 #from django.template import loader
 from backoffice.models import *
 from backoffice.forms import CustomerForm, MuscleForm
+
+#To use in the template
+def simple_debug(obj):
+    return obj.__dict__
+
+def object_debug(obj):
+    """
+    How use:
+        debug = object_debug(Customer.objects.filter(id=id))
+        return debug
+    """
+    # import Modules for debug
+    from django.http import JsonResponse
+    from django.core.serializers import serialize
+    import json
+
+    serialized_data = serialize("json", obj)
+    serialized_data = json.loads(serialized_data)
+    serialized_data
+
+    return JsonResponse(serialized_data, safe=False, status=200)
 
 def model_blank(request):
     return render(request, 'backoffice/samples/model_blank.html')
@@ -37,11 +59,16 @@ def customer_create(request):
 def customer_read(request, id):
     customer = Customer.objects.get(id=id)
 
+    debug = simple_debug(customer)
+
     return render(request,
                   'backoffice/customers/customer_detail.html',
-                  {'customer': customer})
+                  {'customer': customer,
+                   'debug': debug
+                   })
 def customer_update(request, id):
     customer = Customer.objects.get(id=id)
+
     if request.method == 'POST':
         form = CustomerForm(request.POST, instance=customer)
         if form.is_valid():

@@ -81,6 +81,7 @@ DATABASES = {
         #'NAME': BASE_DIR / 'db.sqlite3',
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'wellness_training',
+        #'NAME': 'wellness_auth',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'USER': 'root',
@@ -129,3 +130,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#AUTH_USER_MODEL = 'backoffice.Customer'

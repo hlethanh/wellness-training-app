@@ -1,0 +1,9 @@
+Add / Save = btn btn-primary
+Remove = btn btn-danger
+Edit = btn btn-secondary
+View = btn btn-info
+Cancel = btn btn-success / btn btn-warning
+
+View / Edit / Delete
+
+
