@@ -16,24 +16,24 @@
                         <div class="card-body pt-0">
                             <div class="text-center">
                                 <img
-                                        {% if customer.civility == "M." %}
+                                        {% if customer.civility == 'M' %}
                                             src="{% static 'backoffice/img/avatars/avatar-nobody-m.png' %}"
-                                        {% elif customer.civility == "Mme" %}
+                                        {% elif customer.civility == 'Mme'%}
                                             src="{% static 'backoffice/img/avatars/avatar-nobody-f.png' %}"
                                         {% else %}
                                             src="{% static 'backoffice/img/avatars/avatar-nobody.png' %}"
                                         {% endif %}
-                                        alt="Avatar"
-                                        title="Avatar"
-                                        class="img-fluid rounded-circle mb-2"
-                                        width="128" height="128" />
+                                    alt="{{ customer.lastname }} {{ customer.firstname }}"
+                                    title="{{ customer.lastname }} {{ customer.firstname }}"
+                                    class="img-fluid rounded-circle mb-2"
+                                    width="128" height="128"/>
                             </div>
                             <div class="mb-3"><label class="form-label">Civility: (*)</label>{{ form.civility }}</div>
-                            <div class="mb-3"><label class="form-label">Lastname: (*)</label>{{ form.lastname }}</div>
-                            <div class="mb-3"><label class="form-label">Firstname:</label>{{ form.firstname }}</div>
-                            <div class="mb-3"><label class="form-label">Phone: (*)</label>{{ form.phone }}</div>
+                            <div class="mb-3"><label class="form-label">Lastname: (*)</label>{{ form.last_name }}</div>
+                            <div class="mb-3"><label class="form-label">Firstname:</label>{{ form.first_name }}</div>
                             <div class="mb-3"><label class="form-label">Email: (*)</label>{{ form.email }}</div>
-                            <div class="mb-3"><label class="form-label">Actif: (*)</label>{{ form.active }}</div>
+                            <div class="mb-3"><label class="form-label">Phone: (*)</label>{{ form.phone }}</div>
+                            <div class="mb-3"><label class="form-label">Actif: (*)</label>{{ form.is_active }}</div>
                         </div>
                     </div>
                 </div>
@@ -45,10 +45,10 @@
                            <hr />
                        </div>
                        <div class="card-body pt-0">
+                           <div class="mb-3"><label class="form-label">Address:</label>{{ form.address }}</div>
                            <div class="mb-3"><label class="form-label">Num:</label>{{ form.address_num }}</div>
                            <div class="mb-3"><label class="form-label">Box:</label>{{ form.address_box }}</div>
                            <div class="mb-3"><label class="form-label">Zip code:</label>{{ form.address_zip_code }}</div>
-                           <div class="mb-3"><label class="form-label">Address:</label>{{ form.address }}</div>
                            <div class="mb-3"><label class="form-label">City:</label>{{ form.address_city }}</div>
                            <div class="mb-3"><label class="form-label">Country:</label>{{ form.address_country }}</div>
                        </div>

@@ -23,16 +23,18 @@ urlpatterns = [
     path('model-table/', views.model_table, name='model-table'),
 
     path('admin/', admin.site.urls),
+
     path('', views.index, name='home'),
+
     path('customers/', views.customer_list, name='customer-list'),
-    path('customer/create/', views.customer_create, name='customer-create'),
-    path('customer/detail/<int:id>/', views.customer_read, name='customer-read'),
-    path('customer/update/<int:id>/', views.customer_update, name='customer-update'),
+    path('customer/add/', views.customer_create, name='customer-create'),
+    path('customer/show/<int:id>/', views.customer_read, name='customer-read'),
+    path('customer/edit/<int:id>/', views.customer_update, name='customer-update'),
     path('customer/delete/<int:id>/', views.customer_delete, name='customer-delete'),
 
     path('muscles/', views.muscle_list, name='muscle-list'),
-    path('muscle/create/', views.muscle_create, name='muscle-create'),
-    path('muscle/update/', views.muscle_update, name='muscle-update'),
+    path('muscle/add/', views.muscle_create, name='muscle-create'),
+    path('muscle/edit/', views.muscle_update, name='muscle-update'),
     path('muscle/delete/<int:id>/', views.muscle_delete, name='muscle-delete'),
 
 ]

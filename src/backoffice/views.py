@@ -4,12 +4,11 @@ from django.core.serializers import serialize
 from django.forms import modelformset_factory, TextInput
 #from django.template import loader
 from backoffice.models import *
-from backoffice.forms import CustomerForm, MuscleForm
+from backoffice.forms import CustomerCreate, CustomerUpdate, MuscleForm
 
 #To use in the template
 def simple_debug(obj):
     return obj.__dict__
-
 def object_debug(obj):
     """
     How use:
@@ -27,6 +26,7 @@ def object_debug(obj):
 
     return JsonResponse(serialized_data, safe=False, status=200)
 
+
 def model_blank(request):
     return render(request, 'backoffice/samples/model_blank.html')
 def model_table(request):
@@ -34,24 +34,25 @@ def model_table(request):
 def index(request):
     return redirect('customer-list')
 
+
 def customer_list(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.all().filter(is_superuser=False)
 
     return render(request,
                   'backoffice/customers/customer_list.html',
                   {'customers': customers})
 def customer_create(request):
     if request.method == 'POST':
-        form = CustomerForm(request.POST)
+        form = CustomerCreate(request.POST)
         if form.is_valid():
             # créer une nouvelle « Band » et la sauvegarder dans la db
-            customer = form.save()
+            form.save()
             # redirige vers la page de détail du groupe que nous venons de créer
             # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
             #return redirect('program-detail', program.id)
             return redirect('customer-list')
     else:
-        form = CustomerForm()
+        form = CustomerCreate()
 
     return render(request,
                   'backoffice/customers/customer_form.html',
@@ -59,25 +60,20 @@ def customer_create(request):
 def customer_read(request, id):
     customer = Customer.objects.get(id=id)
 
-    debug = simple_debug(customer)
-
     return render(request,
                   'backoffice/customers/customer_detail.html',
-                  {'customer': customer,
-                   'debug': debug
-                   })
+                  {'customer': customer})
 def customer_update(request, id):
     customer = Customer.objects.get(id=id)
-
     if request.method == 'POST':
-        form = CustomerForm(request.POST, instance=customer)
+        form = CustomerUpdate(request.POST, instance=customer)
         if form.is_valid():
             # mettre à jour le groupe existant dans la base de données
             form.save()
             # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
             return redirect('customer-read', customer.id)
     else:
-        form = CustomerForm(instance=customer)  # on pré-remplir le formulaire avec un groupe existant
+        form = CustomerUpdate(instance=customer)  # on pré-remplir le formulaire avec un groupe existant
 
     return render(request,
                   'backoffice/customers/customer_form.html',
@@ -86,6 +82,7 @@ def customer_delete(request, id):
     customer = Customer.objects.get(id=id)
     customer.delete()
     return redirect('customer-list')
+
 
 def muscle_list(request):
     muscles = MuscleGroup.objects.all()

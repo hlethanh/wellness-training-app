@@ -21,23 +21,39 @@
                      <tr>
                          <th>Lastname</th>
                          <th>Firstname</th>
+                         <th>Email</th>
+                         <th>Phone</th>
+                         <th>Zip code</th>
+                         <th>City</th>
+                         <th>Actif</th>
                          <th></th>
                      </tr>
                  </thead>
                  <tbody>
                     {% for customer in customers %}
                      <tr>
-                        <td>{{ customer.lastname }}</td>
-                        <td>{% if customer.firstname != None %}
-                                {{ customer.firstname }}
+                        <td>{{ customer.last_name }}</td>
+                        <td>
+                            {% if customer.first_name != None %}
+                                {{ customer.first_name }}
                             {% endif %}
                         </td>
-                        <td class="text-end">
-                            <!--
-                            <span><a alt="Edit" title="Edit" href="{% url 'customer-update' customer.id %}"><i class="me-2" data-feather="edit"></i></a></span>
-                            <span><a alt="Delete" title="Delete" href="{% url 'customer-delete' customer.id %}"><i class="me-2" data-feather="trash-2"></i></a></span>
-                            <span><a alt="Create" title="Create" href="{% url 'customer-create' %}"><i class="me-2" data-feather="user-plus"></i></a></span>
-                            -->
+
+                         <td>{{ customer.email }}</td>
+                         <td>{{ customer.phone }}</td>
+                         <td>
+                             {% if customer.address_zip_code != None %}
+                                {{ customer.address_zip_code }}
+                             {% endif %}
+                         </td>
+                         <td>
+                             {% if customer.address_city != None %}
+                                {{ customer.address_city }}
+                             {% endif %}
+                         </td>
+                         <td>{{ customer.is_active }}</td>
+
+                         <td class="text-end">
                             <a href="{% url 'customer-read' customer.id %}" alt="View" title="View"><button type=button class="btn btn-info btn-sm"><i class="me-1" data-feather="eye"></i>View</button></a>
                             <a href="{% url 'customer-update' customer.id %}" alt="Edit" title="Edit"><button type=button class="btn btn-secondary btn-sm"><i class="me-1" data-feather="edit"></i>Edit</button></a>
                             <a href="{% url 'customer-delete' customer.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a>

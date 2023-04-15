@@ -3,37 +3,42 @@ from datetime import date
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
-#class User(AbstractUser):
-    #address = models.fields.CharField(blank=True, null=True, max_length=250)
-
 #Cette class définit les abonnés
-class Customer(models.Model):
+class Customer(AbstractUser):
     class Meta:
         verbose_name = 'Customer'
         verbose_name_plural = 'Customers'
+
     class Civility(models.TextChoices):
         M = 'M'
         Mme = 'Mme'
 
+    #username = None
+    username = models.fields.CharField(blank=True, max_length=100)
     civility = models.fields.CharField(choices=Civility.choices, blank=False, max_length=10)
-
-    lastname = models.fields.CharField(blank=False, max_length=100)
-    firstname = models.fields.CharField(blank=True, null=True, max_length=100)
-    email = models.fields.EmailField(blank=False, max_length=254, unique=False)
-
+    last_name = models.fields.CharField(blank=False, max_length=100)
+    first_name = models.fields.CharField(blank=True, null=True, max_length=100)
+    #email = models.fields.EmailField(unique=True)
+    email = models.fields.EmailField(blank=False, max_length=254, unique=True)
     phone = models.fields.CharField(blank=False, max_length=15, unique=False)
+
+    password = models.CharField(max_length=128, blank=True, null=True)
+
     address = models.fields.CharField(blank=True, null=True, max_length=250)
     address_num = models.fields.IntegerField(blank=True, null=True)
     address_box = models.fields.IntegerField(blank=True, null=True)
     address_zip_code = models.fields.IntegerField(blank=True, null=True)
     address_city = models.fields.CharField(blank=True, null=True, max_length=250)
     address_country = models.fields.CharField(blank=True, null=True, max_length=250)
+
     birthday = models.DateField(blank=True, null=True)
     weight = models.FloatField(blank=True, null=True)
-    active = models.BooleanField(default=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
-        return f'{self.lastname} {self.firstname}'
+        return f'{self.last_name} {self.first_name}'
 
 #Cette class définit tous les groupes musculaires
 class MuscleGroup(models.Model):
