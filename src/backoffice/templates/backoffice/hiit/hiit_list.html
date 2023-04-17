@@ -1,0 +1,42 @@
+{% extends 'backoffice/layouts/base.html' %}
+{% load static %}
+{% block title %}WarmUps List{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+   <div class="row">
+      <div class="col-12 col-lg-10 col-xxl-12 d-flex">
+         <div class="card flex-fill">
+             <div class="card-header">
+                 <h5 class="card-title mb-0">Hiit List</h5>
+                 <div class="container-left">
+                     <a href="{% url 'hiit-create' %}" alt="Add" title="Add"><button type=button class="btn btn-primary btn-sm"><i class="me-1" data-feather="plus-square"></i>Add</button></a>
+                 </div>
+                 <hr/>
+             </div>
+             <table class="table table-hover my-0">
+                 <thead>
+                     <tr>
+                         <th>Name</th>
+                         <th>Muscle</th>
+                         <th></th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    {% for h in hiit %}
+                     <tr>
+                        <td>{{ h.name }}</td>
+                        <td>{{ h.muscle_group.name }}</td>
+                        <td class="text-end">
+                            <a href="{% url 'hiit-update' h.id %}" alt="Edit" title="Edit"><button type=button class="btn btn-secondary btn-sm"><i class="me-1" data-feather="edit"></i>Edit</button></a>
+                            <a href="{% url 'hiit-delete' h.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a>
+                        </td>
+                     </tr>
+                    {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

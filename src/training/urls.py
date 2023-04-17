@@ -26,15 +26,24 @@ urlpatterns = [
 
     path('', views.index, name='home'),
 
-    path('customers/', views.customer_list, name='customer-list'),
+    path('customer/', views.customer_list, name='customer-list'),
     path('customer/add/', views.customer_create, name='customer-create'),
     path('customer/show/<int:id>/', views.customer_read, name='customer-read'),
     path('customer/edit/<int:id>/', views.customer_update, name='customer-update'),
     path('customer/delete/<int:id>/', views.customer_delete, name='customer-delete'),
 
-    path('muscles/', views.muscle_list, name='muscle-list'),
+    path('muscle/', views.muscle_list, name='muscle-list'),
     path('muscle/add/', views.muscle_create, name='muscle-create'),
     path('muscle/edit/', views.muscle_update, name='muscle-update'),
     path('muscle/delete/<int:id>/', views.muscle_delete, name='muscle-delete'),
 
+    path('exercise/', views.exercise_list, name='exercise-list'),
+    path('exercise/add/', views.exercise_create, name='exercise-create'),
+    path('exercise/edit/<int:id>/', views.exercise_update, name='exercise-update'),
+    path('exercise/delete/<int:id>/', views.exercise_delete, name='exercise-delete'),
+
+    path('hiit/', views.hiit_list, name='hiit-list'),
+    path('hiit/add/', views.hiit_create, name='hiit-create'),
+    path('hiit/edit/<int:id>/', views.hiit_update, name='hiit-update'),
+    path('hiit/delete/<int:id>/', views.hiit_delete, name='hiit-delete'),
 ]

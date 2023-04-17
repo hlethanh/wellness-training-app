@@ -45,20 +45,33 @@ class MuscleGroup(models.Model):
     class Meta:
         verbose_name = 'Muscle'
         verbose_name_plural = 'Muscles'
+        ordering = ["name"]
 
     name = models.fields.CharField(blank=True, null=True, max_length=50)
 
-    def all_exercises(self):
-        return " / ".join(map(str, [s.name for s in MuscleGroupExo.objects.filter(muscle_group=self)[0:3]]))
+    def exercises(self):
+        return " / ".join(map(str, [e.name for e in Exercise.objects.filter(muscle_group=self)[0:3]]))
 
     def __str__(self):
         return f'{self.name}'
 
 #Cette class définit tous les exercices associés à un groupe musculaire
-class MuscleGroupExo(models.Model):
+class Exercise(models.Model):
     class Meta:
         verbose_name = 'Exercise'
         verbose_name_plural = 'Exercises'
+
+    name = models.fields.CharField(blank=True, null=True, max_length=250)
+    muscle_group = models.ForeignKey(MuscleGroup, null=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'[ {self.muscle_group.name} ] - {self.name}'
+
+class Hiit(models.Model):
+    class Meta:
+        verbose_name = 'Hiit'
+        verbose_name_plural = 'Hiit'
+        ordering = ["name"]
 
     name = models.fields.CharField(blank=True, null=True, max_length=250)
     muscle_group = models.ForeignKey(MuscleGroup, null=True, on_delete=models.CASCADE)

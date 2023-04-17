@@ -1,0 +1,55 @@
+{% extends 'backoffice/layouts/base.html' %}
+{% load static %}
+{% block title %}Warm-up Add{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-0">
+       <div class="row">
+           <form method="post">
+               {% csrf_token %}
+               <div class="col-12 col-lg-10 col-xxl-12 d-flex">
+                  <div class="card flex-fill">
+                      <div class="card-header">
+                         <h5 class="card-title mb-0">Hiit Add</h5>
+                          <div class="container-left">
+                              <span data-feather="list" class="feather-sm me-1"></span><a alt="Go to Hiit" title="Go to Hiit" href="{% url 'hiit-list' %}">Go to Hiit</a>
+                          </div>
+                         <hr/>
+                     </div>
+                      <table class="table table-hover my-0">
+                        <thead>
+                             <tr>
+                                 <th>Name</th>
+                                 <th>Muscle</th>
+                             </tr>
+                         </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ form.name }}</td>
+                                 <td>{{ form.muscle_group }}</td>
+                             </tr>
+                         </tbody>
+                    </table>
+                 </div>
+               </div>
+               <div class="col-12 col-lg-10 col-xxl-12 d-flex">
+                   <div class="card flex-fill">
+                       <div class="card-header">
+                           <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <hr/>
+                                    <div class="float-end">
+                                        <button type="submit" class="btn btn-primary btn-sm"><span data-feather="save" class="feather-sm me-1"></span>Save</button>
+                                        <a alt="Cancel" title="Cancel" href="{{request.META.HTTP_REFERER|escape}}">
+                                            <button type=button class="btn btn-success btn-sm"><span data-feather="x-square" class="feather-sm me-1"></span>Cancel</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+           </form>
+       </div>
+    </div>
+{% endblock %}

@@ -4,7 +4,7 @@ from django.core.serializers import serialize
 from django.forms import modelformset_factory, TextInput
 #from django.template import loader
 from backoffice.models import *
-from backoffice.forms import CustomerCreate, CustomerUpdate, MuscleForm
+from backoffice.forms import CustomerCreateForm, CustomerUpdateForm, MuscleForm, ExerciseForm, HiitForm
 
 #To use in the template
 def simple_debug(obj):
@@ -138,3 +138,94 @@ def muscle_delete(request, id):
     muscle = MuscleGroup.objects.get(id=id)
     muscle.delete()
     return redirect('muscle-list')
+
+def exercise_list(request):
+    exercises = Exercise.objects.all()
+
+    return render(request,
+                  'backoffice/exercises/exercise_list.html',
+                  {'exercises': exercises})
+def exercise_create(request):
+
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST)
+        if form.is_valid():
+            # créer une nouvelle « Band » et la sauvegarder dans la db
+            form.save()
+            # redirige vers la page de détail du groupe que nous venons de créer
+            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            #return redirect('program-detail', program.id)
+            return redirect('exercise-list')
+    else:
+        form = ExerciseForm()
+
+    return render(request,
+                  'backoffice/exercises/exercise_form.html',
+                  {'form': form})
+def exercise_update(request, id):
+
+    exercise = Exercise.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = ExerciseForm(request.POST, instance=exercise)
+        if form.is_valid():
+            # créer une nouvelle « Band » et la sauvegarder dans la db
+            form.save()
+            # redirige vers la page de détail du groupe que nous venons de créer
+            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            return redirect('exercise-list')
+    else:
+        form = ExerciseForm(instance=exercise)
+
+    return render(request,
+                  'backoffice/exercises/exercise_form.html',
+                  {'form': form})
+def exercise_delete(request, id):
+    exercise = Exercise.objects.get(id=id)
+    exercise.delete()
+    return redirect('exercise-list')
+
+def hiit_list(request):
+    hiit = Hiit.objects.all()
+    return render(request,
+                  'backoffice/hiit/hiit_list.html',
+                  {'hiit': hiit})
+def hiit_create(request):
+
+    if request.method == 'POST':
+        form = HiitForm(request.POST)
+        if form.is_valid():
+            # créer une nouvelle « Band » et la sauvegarder dans la db
+            form.save()
+            # redirige vers la page de détail du groupe que nous venons de créer
+            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            #return redirect('program-detail', program.id)
+            return redirect('hiit-list')
+    else:
+        form = HiitForm()
+
+    return render(request,
+                  'backoffice/hiit/hiit_add.html',
+                  {'form': form})
+def hiit_update(request, id):
+
+    hiit = Hiit.objects.get(id=id)
+
+    if request.method == 'POST':
+        form = HiitForm(request.POST, instance=hiit)
+        if form.is_valid():
+            # créer une nouvelle « Band » et la sauvegarder dans la db
+            form.save()
+            # redirige vers la page de détail du groupe que nous venons de créer
+            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
+            return redirect('hiit-list')
+    else:
+        form = HiitForm(instance=hiit)
+
+    return render(request,
+                  'backoffice/hiit/hiit_update.html',
+                  {'form': form})
+def hiit_delete(request, id):
+    hiit = Hiit.objects.get(id=id)
+    hiit.delete()
+    return redirect('hiit-list')

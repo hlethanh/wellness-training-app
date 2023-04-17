@@ -49,9 +49,8 @@ class CustomerAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.DateField:{'widget': PastCustomDatePickerWidget}
     }
-
-class MuscleGroupExoStackedInline(admin.StackedInline):
-    model = MuscleGroupExo
+class ExerciseStackedInline(admin.StackedInline):
+    model = Exercise
     extra = 0
     classes = ['no-collapse']
     #max_num = 2
@@ -61,21 +60,22 @@ class MuscleGroupExoStackedInline(admin.StackedInline):
     ordering = ['id']
 class MuscleGroupAdmin(admin.ModelAdmin):
     fields = ['name']
-    inlines = [MuscleGroupExoStackedInline]
-    list_display = ['name','all_exercises']
-
-    verbose_name = 'Hello'
-    verbose_name_plural = 'Hellos'
-
+    inlines = [ExerciseStackedInline]
+    list_display = ['name','exercises']
     ordering = ['name']  # ASC
-
-class MuscleGroupExoAdmin(admin.ModelAdmin):
+class ExerciseAdmin(admin.ModelAdmin):
     list_display = ['name','muscle_group']
     list_filter = ['muscle_group']
     search_fields = ['muscle_group__name']
     ordering = ['muscle_group__name']  # ASC
+class HiitAdmin(admin.ModelAdmin):
+    list_display = ['name', 'muscle_group']
+    list_filter = ['muscle_group']
+    search_fields = ['muscle_group__name']
+    ordering = ['name']  # ASC
 
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(MuscleGroup,MuscleGroupAdmin)
-admin.site.register(MuscleGroupExo, MuscleGroupExoAdmin)
+admin.site.register(Exercise, ExerciseAdmin)
+admin.site.register(Hiit, HiitAdmin)
