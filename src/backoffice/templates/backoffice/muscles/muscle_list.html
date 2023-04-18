@@ -26,7 +26,12 @@
                     {% for muscle in muscles %}
                      <tr>
                         <td>{{ muscle.name }}</td>
-                        <td class="text-end"><a href="{% url 'muscle-delete' muscle.id %}" alt="Delete" title="Delete"><button type=button class="btn btn-outline-danger btn-sm"><i class="me-1" data-feather="trash"></i>Delete</button></a></td>
+                        <td class="text-end">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal_{{ muscle.id }}">
+                                <i class="me-1" data-feather="trash"></i>Delete
+                            </button>
+                        </td>
                      </tr>
                     {% endfor %}
                  </tbody>
@@ -35,4 +40,29 @@
       </div>
    </div>
 </div>
+
+<!-- Modal -->
+{% for muscle in muscles %}
+<div class="modal fade" id="modal_{{ muscle.id }}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="modalLabel">Are you sure?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure you want to delete the Muscle "{{ muscle.name }}" ?</p>
+          <p>All of the following related items will be deleted:</p>
+      </div>
+      <div class="modal-footer">
+          <a href="{% url 'muscle-delete' muscle.id %}" alt="Delete" title="Delete">
+              <button type="button" id="btnSave" class="btn btn-danger btn-sm">Yes, I'm sure</button>
+          </a>
+          <button type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">No, take me back</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
 {% endblock %}

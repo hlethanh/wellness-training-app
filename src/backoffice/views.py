@@ -43,7 +43,7 @@ def customer_list(request):
                   {'customers': customers})
 def customer_create(request):
     if request.method == 'POST':
-        form = CustomerCreate(request.POST)
+        form = CustomerCreateForm(request.POST)
         if form.is_valid():
             # créer une nouvelle « Band » et la sauvegarder dans la db
             form.save()
@@ -52,7 +52,7 @@ def customer_create(request):
             #return redirect('program-detail', program.id)
             return redirect('customer-list')
     else:
-        form = CustomerCreate()
+        form = CustomerCreateForm()
 
     return render(request,
                   'backoffice/customers/customer_form.html',
@@ -66,14 +66,14 @@ def customer_read(request, id):
 def customer_update(request, id):
     customer = Customer.objects.get(id=id)
     if request.method == 'POST':
-        form = CustomerUpdate(request.POST, instance=customer)
+        form = CustomerUpdateForm(request.POST, instance=customer)
         if form.is_valid():
             # mettre à jour le groupe existant dans la base de données
             form.save()
             # rediriger vers la page détaillée du groupe que nous venons de mettre à jour
             return redirect('customer-read', customer.id)
     else:
-        form = CustomerUpdate(instance=customer)  # on pré-remplir le formulaire avec un groupe existant
+        form = CustomerUpdateForm(instance=customer)  # on pré-remplir le formulaire avec un groupe existant
 
     return render(request,
                   'backoffice/customers/customer_form.html',
