@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core.serializers import serialize
 from django.forms import modelformset_factory, TextInput
+from django.contrib import messages
+from django.urls import reverse
+from urllib.parse import urlencode
 #from django.template import loader
 from backoffice.models import *
 from backoffice.forms import CustomerCreateForm, CustomerUpdateForm, MuscleForm, ExerciseForm, HiitForm
@@ -33,6 +36,12 @@ def model_table(request):
     return render(request, 'backoffice/samples/model_table.html')
 def index(request):
     return redirect('customer-list')
+
+def c_url(viewName, param, value):
+    base_url = reverse(viewName)                    # 1 /viewName/
+    query_string = urlencode({param: value})        # 2 view=create
+    url = '{}?{}'.format(base_url, query_string)    # 3 /viewName/?view=create
+    return url
 
 
 def customer_list(request):
@@ -86,26 +95,27 @@ def customer_delete(request, id):
 
 def muscle_list(request):
     muscles = MuscleGroup.objects.all()
-
     return render(request,
                   'backoffice/muscles/muscle_list.html',
                   {'muscles': muscles})
 def muscle_create(request):
-    if request.method == 'POST':
+
+    if request.method == 'GET':
+        form = MuscleForm()
+        return render(request, 'backoffice/muscles/muscle_add.html', {'form': form})
+
+    elif request.method == 'POST':
         form = MuscleForm(request.POST)
         if form.is_valid():
-            # créer une nouvelle « Band » et la sauvegarder dans la db
-            customer = form.save()
-            # redirige vers la page de détail du groupe que nous venons de créer
-            # nous pouvons fournir les arguments du motif url comme arguments à la fonction de redirection
-            #return redirect('program-detail', program.id)
-            return redirect('muscle-list')
-    else:
-        form = MuscleForm()
 
-    return render(request,
-                  'backoffice/muscles/muscle_add.html',
-                  {'form': form})
+            form.save()
+            messages.success(request, 'The item has been created successfully.')
+            url = c_url('muscle-list', 'view', 'create')
+            return redirect(url)
+        else:
+            messages.error(request, 'Please correct the following errors:')
+            return render(request, 'backoffice/muscles/muscle_add.html', {'form': form})
+
 def muscle_update(request):
     MusclesFormSet = modelformset_factory(MuscleGroup,
                                           fields=['name'],
@@ -122,7 +132,8 @@ def muscle_update(request):
             for instance in instances:
                 instance.save()
 
-        return redirect('muscle-list')
+        #return redirect('muscle-list')
+        return redirect('/muscle/?view=update')
 
     else:
         muscles = MusclesFormSet()
@@ -137,10 +148,12 @@ def muscle_update(request):
 def muscle_delete(request, id):
     muscle = MuscleGroup.objects.get(id=id)
     muscle.delete()
-    return redirect('muscle-list')
+    messages.error(request, 'The item - '+muscle.name + ' - has been delete successfully.')
+    url = c_url('muscle-list', 'view', 'delete')
+    return redirect(url)
 
 def exercise_list(request):
-    exercises = Exercise.objects.all()
+    exercises = ExoBody.objects.all()
 
     return render(request,
                   'backoffice/exercises/exercise_list.html',
@@ -164,7 +177,7 @@ def exercise_create(request):
                   {'form': form})
 def exercise_update(request, id):
 
-    exercise = Exercise.objects.get(id=id)
+    exercise = ExoBody.objects.get(id=id)
 
     if request.method == 'POST':
         form = ExerciseForm(request.POST, instance=exercise)
@@ -181,12 +194,12 @@ def exercise_update(request, id):
                   'backoffice/exercises/exercise_form.html',
                   {'form': form})
 def exercise_delete(request, id):
-    exercise = Exercise.objects.get(id=id)
+    exercise = ExoBody.objects.get(id=id)
     exercise.delete()
     return redirect('exercise-list')
 
 def hiit_list(request):
-    hiit = Hiit.objects.all()
+    hiit = ExoHiit.objects.all()
     return render(request,
                   'backoffice/hiit/hiit_list.html',
                   {'hiit': hiit})
@@ -209,7 +222,7 @@ def hiit_create(request):
                   {'form': form})
 def hiit_update(request, id):
 
-    hiit = Hiit.objects.get(id=id)
+    hiit = ExoHiit.objects.get(id=id)
 
     if request.method == 'POST':
         form = HiitForm(request.POST, instance=hiit)
@@ -226,6 +239,6 @@ def hiit_update(request, id):
                   'backoffice/hiit/hiit_update.html',
                   {'form': form})
 def hiit_delete(request, id):
-    hiit = Hiit.objects.get(id=id)
+    hiit = ExoHiit.objects.get(id=id)
     hiit.delete()
     return redirect('hiit-list')

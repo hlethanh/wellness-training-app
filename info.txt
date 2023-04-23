@@ -6,4 +6,14 @@ Cancel = btn btn-success / btn btn-warning
 
 View / Edit / Delete
 
+Change the start id number in mysql
+===================================
+ALTER TABLE my_table AUTO_INCREMENT=2000;
 
+JQuery
+======
+    var myModal = document.getElementById('myModal');
+    var myInput = document.getElementById('myInput');
+    myModal.addEventListener('shown.bs.modal', function () { myInput.focus() })
+
+    $("#alert-flash").fadeTo(2000, 500).slideUp(500, function(){ $("#alert-flash").alert('close'); });

@@ -1,10 +1,7 @@
 $(function(){
-    /*
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-          myInput.focus()
-        })
-    */
+    $("#alert-flash").delay(2500).fadeOut(500, function(){
+        $("#alert-flash").alert('close');
+    });
+
 });

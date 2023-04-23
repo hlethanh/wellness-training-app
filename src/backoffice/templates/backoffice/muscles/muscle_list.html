@@ -4,9 +4,17 @@
 
 {% block content %}
 <div class="container-fluid p-0">
-   <div class="row">
+    {% if messages %}
+        {% for message in messages %}
+            <div id="alert-flash" class="alert {% if message.tags %}alert-{{ message.tags }} {% endif %} alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
       <div class="col-12 col-lg-10 col-xxl-12 d-flex">
-         <div class="card flex-fill">
+          <div class="card flex-fill">
              <div class="card-header">
                  <h5 class="card-title mb-0">Muscles List</h5>
                  <div class="container-left">

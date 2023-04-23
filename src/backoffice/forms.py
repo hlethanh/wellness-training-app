@@ -2,7 +2,7 @@ from django import forms
 from django.forms import TextInput, Select
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from backoffice.models import Customer, MuscleGroup, Exercise, Hiit
+from backoffice.models import Customer, MuscleGroup, ExoBody, ExoHiit
 
 TRUE_FALSE_CHOICES = (
     (True, 'Yes'),
@@ -68,7 +68,7 @@ class MuscleForm(forms.ModelForm):
         }
 class ExerciseForm(forms.ModelForm):
     class Meta:
-        model = Exercise
+        model = ExoBody
         fields = '__all__'
         widgets = {
             'name': TextInput(attrs={'class': 'form-control', 'style': 'width:50%'}),
@@ -76,7 +76,7 @@ class ExerciseForm(forms.ModelForm):
                    }
 class HiitForm(forms.ModelForm):
     class Meta:
-        model = Hiit
+        model = ExoHiit
         fields = '__all__'
         widgets = {
             'name': TextInput(attrs={'class': 'form-control', 'style': 'width:50%'}),
